@@ -1,0 +1,2456 @@
+[
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "receiver",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "licensee",
+          "type": "address"
+        }
+      ],
+      "name": "AccountStatusNotPending",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "licensee",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "licenseHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "AlreadyAppliedForLicense",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "licensee",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "applicationHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "ApplicationNotFound",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "licensee",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "applicationHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "ApplicationNotPaid",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ECDSAInvalidSignature",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "length",
+          "type": "uint256"
+        }
+      ],
+      "name": "ECDSAInvalidSignatureLength",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "s",
+          "type": "bytes32"
+        }
+      ],
+      "name": "ECDSAInvalidSignatureS",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "EmptyBaseTerms",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "EmptyLicenseHash",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "EmptyLicenseeData",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "EmptyNewTerms",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "expirationDate",
+          "type": "uint256"
+        }
+      ],
+      "name": "InvalidExpirationDate",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "extraData",
+          "type": "uint256"
+        }
+      ],
+      "name": "InvalidExtraDataLength",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "licenseFee",
+          "type": "uint256"
+        }
+      ],
+      "name": "InvalidLicenseFee",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "licensee",
+          "type": "address"
+        }
+      ],
+      "name": "InvalidLicenseeAddress",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "receiver",
+          "type": "address"
+        }
+      ],
+      "name": "InvalidReceiverAddress",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "recoveredAddress",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "licensee",
+          "type": "address"
+        }
+      ],
+      "name": "InvalidSignature",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "licenseHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "LicenseAlreadyExists",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "licensee",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "applicationHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "LicenseAlreadyUsable",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "licenseHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "LicenseDoesntExist",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "licensee",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "applicationHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "LicenseNotUsable",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "licensee",
+          "type": "address"
+        }
+      ],
+      "name": "LicenseeAlreadyExists",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "licensee",
+          "type": "address"
+        }
+      ],
+      "name": "LicenseeDoesntExist",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "licensee",
+          "type": "address"
+        }
+      ],
+      "name": "LicenseeNoApplications",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        }
+      ],
+      "name": "MultiOwnableAlreadyOwner",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        }
+      ],
+      "name": "MultiOwnableInvalidOwner",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "caller",
+          "type": "address"
+        }
+      ],
+      "name": "MultiOwnableNotMainOwner",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "caller",
+          "type": "address"
+        }
+      ],
+      "name": "MultiOwnableUnauthorized",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "licensee",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "applicationHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "NewReportNotYetAllowed",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "caller",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "applicationHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "NotOwnerOrLicenseOwner",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "caller",
+          "type": "address"
+        }
+      ],
+      "name": "NotOwnerOrLicensee",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "licensee",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "applicationHash",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint256",
+          "name": "reportIndex",
+          "type": "uint256"
+        }
+      ],
+      "name": "ReportAlreadyApproved",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "licensee",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "applicationHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "ReportDoesntExist",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "licensee",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "applicationHash",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint256",
+          "name": "reportIndex",
+          "type": "uint256"
+        }
+      ],
+      "name": "ReportNotYetApproved",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "licensee",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "applicationHash",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint256",
+          "name": "reportIndex",
+          "type": "uint256"
+        }
+      ],
+      "name": "RoyaltyAlreadyPaid",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "licensee",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "applicationHash",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint256",
+          "name": "reportIndex",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "royaltyDue",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "royaltyToPay",
+          "type": "uint256"
+        }
+      ],
+      "name": "RoyaltyAmountMismatch",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "licensee",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "applicationHash",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint256",
+          "name": "reportIndex",
+          "type": "uint256"
+        }
+      ],
+      "name": "RoyaltyNoDeadline",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "licensee",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "applicationHash",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint256",
+          "name": "reportIndex",
+          "type": "uint256"
+        }
+      ],
+      "name": "RoyaltyPaymentNotYetNeeded",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "url",
+          "type": "string"
+        }
+      ],
+      "name": "SameBaseTerms",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes",
+          "name": "data",
+          "type": "bytes"
+        }
+      ],
+      "name": "SameLicenseeData",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "SameReceiverAddress",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "licensee",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "applicationHash",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint256",
+          "name": "reportIndex",
+          "type": "uint256"
+        }
+      ],
+      "name": "UntimelyReportNotRequired",
+      "type": "error"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "licensee",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes32",
+          "name": "applicationHash",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "timestamp",
+          "type": "uint256"
+        }
+      ],
+      "name": "ApplicationApproved",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "licensee",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes32",
+          "name": "applicationHash",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "reason",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "timestamp",
+          "type": "uint256"
+        }
+      ],
+      "name": "ApplicationRemoved",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "licensee",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes32",
+          "name": "applicationHash",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "timestamp",
+          "type": "uint256"
+        }
+      ],
+      "name": "ApplicationSubmitted",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "licenseHash",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "timestamp",
+          "type": "uint256"
+        }
+      ],
+      "name": "LicenseAdded",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "licenseType",
+          "type": "string"
+        }
+      ],
+      "name": "LicenseAdded",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "licenseHash",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "timestamp",
+          "type": "uint256"
+        }
+      ],
+      "name": "LicenseRemoved",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "licenseType",
+          "type": "string"
+        }
+      ],
+      "name": "LicenseRemoved",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "licenseHash",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "newTerms",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "timestamp",
+          "type": "uint256"
+        }
+      ],
+      "name": "LicenseTermsChanged",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "licenseType",
+          "type": "string"
+        }
+      ],
+      "name": "LicenseTermsChanged",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "newLicensee",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "timestamp",
+          "type": "uint256"
+        }
+      ],
+      "name": "LicenseeRegistered",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address[]",
+          "name": "licensee",
+          "type": "address[]"
+        },
+        {
+          "indexed": false,
+          "internalType": "bool",
+          "name": "usable",
+          "type": "bool"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "timestamp",
+          "type": "uint256"
+        }
+      ],
+      "name": "LicenseeStatusesUpdated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address[]",
+          "name": "removedLicensee",
+          "type": "address[]"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "timestamp",
+          "type": "uint256"
+        }
+      ],
+      "name": "LicenseesRemoved",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address[]",
+          "name": "licensee",
+          "type": "address[]"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes[]",
+          "name": "data",
+          "type": "bytes[]"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "timestamp",
+          "type": "uint256"
+        }
+      ],
+      "name": "LicenseesUpdated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "licensee",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes32",
+          "name": "applicationHash",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes",
+          "name": "modifications",
+          "type": "bytes"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "timestamp",
+          "type": "uint256"
+        }
+      ],
+      "name": "ModificationsAdded",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "timestamp",
+          "type": "uint256"
+        }
+      ],
+      "name": "OwnerAdded",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "removedOwner",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "timestamp",
+          "type": "uint256"
+        }
+      ],
+      "name": "OwnerRemoved",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "licensee",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "applicationHash",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "reportIndex",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "timestamp",
+          "type": "uint256"
+        }
+      ],
+      "name": "ReportApproved",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "licensee",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "applicationHash",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "reportIndex",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "timestamp",
+          "type": "uint256"
+        }
+      ],
+      "name": "ReportChanged",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "licensee",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "applicationHash",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "reportIndex",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "extraData",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "timestamp",
+          "type": "uint256"
+        }
+      ],
+      "name": "ReportExtraDataChanged",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "licensee",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "applicationHash",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "reportIndex",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "timestamp",
+          "type": "uint256"
+        }
+      ],
+      "name": "ReportSubmitted",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "licensee",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "applicationHash",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "reportIndex",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "timestamp",
+          "type": "uint256"
+        }
+      ],
+      "name": "RoyaltyPaid",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "licensee",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "applicationHash",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "reportIndex",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "timestamp",
+          "type": "uint256"
+        }
+      ],
+      "name": "UntimelyReport",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "licensee",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "applicationHash",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "reportIndex",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "timestamp",
+          "type": "uint256"
+        }
+      ],
+      "name": "UntimelyRoyaltyPayment",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "licenseHash",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "string",
+          "name": "baseTerms",
+          "type": "string"
+        }
+      ],
+      "name": "addLicense",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "licensee",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "applicationHash",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "bytes",
+          "name": "modifications",
+          "type": "bytes"
+        }
+      ],
+      "name": "addModifications",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "addOwner",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address[]",
+          "name": "licensees",
+          "type": "address[]"
+        }
+      ],
+      "name": "approveAccounts",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "licensee",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "applicationHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "approveApplication",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "licensee",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "applicationHash",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint256",
+          "name": "reportIndex",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "paymentDeadline",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amountDue",
+          "type": "uint256"
+        }
+      ],
+      "name": "approveReport",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "licenseHash",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "string",
+          "name": "newTerms",
+          "type": "string"
+        }
+      ],
+      "name": "changeLicenseTerms",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "licensee",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "applicationHash",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint256",
+          "name": "reportIndex",
+          "type": "uint256"
+        },
+        {
+          "internalType": "string",
+          "name": "newUrl",
+          "type": "string"
+        }
+      ],
+      "name": "changeReport",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getAccount",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "bytes",
+              "name": "data",
+              "type": "bytes"
+            },
+            {
+              "internalType": "bool",
+              "name": "usable",
+              "type": "bool"
+            }
+          ],
+          "internalType": "struct ILicensee.LicenseeAccount",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "licensee",
+          "type": "address"
+        }
+      ],
+      "name": "getAccount",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "bytes",
+              "name": "data",
+              "type": "bytes"
+            },
+            {
+              "internalType": "bool",
+              "name": "usable",
+              "type": "bool"
+            }
+          ],
+          "internalType": "struct ILicensee.LicenseeAccount",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "licensee",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "applicationHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getApprovalDate",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "licensee",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "applicationHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getExpirationDate",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "licensee",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "applicationHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getExtraData",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "licenseHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getLicense",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "licensee",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "applicationHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getLicenseAgreement",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "licensee",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "id",
+              "type": "uint256"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "bytes32",
+                  "name": "licenseHash",
+                  "type": "bytes32"
+                },
+                {
+                  "internalType": "string",
+                  "name": "appliedTerms",
+                  "type": "string"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "firstPackedData",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "secondPackedData",
+                  "type": "uint256"
+                }
+              ],
+              "internalType": "struct IApplication.ApplicationData",
+              "name": "data",
+              "type": "tuple"
+            },
+            {
+              "internalType": "bytes",
+              "name": "signature",
+              "type": "bytes"
+            },
+            {
+              "internalType": "bool",
+              "name": "usable",
+              "type": "bool"
+            },
+            {
+              "internalType": "bool",
+              "name": "feePaid",
+              "type": "bool"
+            },
+            {
+              "internalType": "bytes",
+              "name": "modifications",
+              "type": "bytes"
+            }
+          ],
+          "internalType": "struct IApplication.LicenseAgreement",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "licensee",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "applicationHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getLicenseFee",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "licensee",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "applicationHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getLicenseId",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "licensee",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "applicationHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getModifications",
+      "outputs": [
+        {
+          "internalType": "bytes",
+          "name": "",
+          "type": "bytes"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getReceiver",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "licensee",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "applicationHash",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint256",
+          "name": "reportIndex",
+          "type": "uint256"
+        }
+      ],
+      "name": "getReport",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "amountDue",
+              "type": "uint256"
+            },
+            {
+              "internalType": "string",
+              "name": "url",
+              "type": "string"
+            },
+            {
+              "internalType": "uint256",
+              "name": "packedData",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct IRoyalty.Report",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "licensee",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "applicationHash",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint256",
+          "name": "reportIndex",
+          "type": "uint256"
+        }
+      ],
+      "name": "getReportApprovalTimestamp",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "licensee",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "applicationHash",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint256",
+          "name": "reportIndex",
+          "type": "uint256"
+        }
+      ],
+      "name": "getReportChangeTimestamp",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "licensee",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "applicationHash",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint256",
+          "name": "reportIndex",
+          "type": "uint256"
+        }
+      ],
+      "name": "getReportExtraData",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "licensee",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "applicationHash",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint256",
+          "name": "reportIndex",
+          "type": "uint256"
+        }
+      ],
+      "name": "getReportSubmissionTimestamp",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "licensee",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "applicationHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getReportingFrequency",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "licensee",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "applicationHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getReportingGracePeriod",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "licensee",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "applicationHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getRoyaltyGracePeriod",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "licensee",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "applicationHash",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint256",
+          "name": "reportIndex",
+          "type": "uint256"
+        }
+      ],
+      "name": "getRoyaltyPaymentDeadline",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "licensee",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "applicationHash",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint256",
+          "name": "reportIndex",
+          "type": "uint256"
+        }
+      ],
+      "name": "getRoyaltyPaymentTimestamp",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "licensee",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "applicationHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getSignature",
+      "outputs": [
+        {
+          "internalType": "bytes",
+          "name": "",
+          "type": "bytes"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "licensee",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "applicationHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getSubmissionDate",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "licensee",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "applicationHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getUntimelyReports",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "licensee",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "applicationHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getUntimelyRoyaltyPayments",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "licensee",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "applicationHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "incrementUntimelyReports",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "licensee",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "applicationHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "incrementUntimelyRoyaltyPayments",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "licensee",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "applicationHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "isFeePaid",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "licensee",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "applicationHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "isLicenseUsable",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "toCheck",
+          "type": "address"
+        }
+      ],
+      "name": "isMainOwner",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "toCheck",
+          "type": "address"
+        }
+      ],
+      "name": "isOwner",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "applicationHash",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint256",
+          "name": "reportIndex",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "payRoyalty",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes",
+          "name": "data",
+          "type": "bytes"
+        }
+      ],
+      "name": "registerAccount",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "removeAccount",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address[]",
+          "name": "licensees",
+          "type": "address[]"
+        }
+      ],
+      "name": "removeAccounts",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "licensee",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "applicationHash",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "string",
+          "name": "reason",
+          "type": "string"
+        }
+      ],
+      "name": "removeApplication",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "licenseHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "removeLicense",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "toRemove",
+          "type": "address"
+        }
+      ],
+      "name": "removeOwner",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "licensee",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "applicationHash",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint256",
+          "name": "extraData",
+          "type": "uint256"
+        }
+      ],
+      "name": "setExtraData",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "receiver",
+          "type": "address"
+        }
+      ],
+      "name": "setReceiver",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "licensee",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "applicationHash",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint256",
+          "name": "reportIndex",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "extraData",
+          "type": "uint256"
+        }
+      ],
+      "name": "setReportExtraData",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "licenseHash",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "string",
+          "name": "appliedTerms",
+          "type": "string"
+        },
+        {
+          "internalType": "uint256",
+          "name": "firstPackedData",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "secondPackedData",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bytes",
+          "name": "signature",
+          "type": "bytes"
+        },
+        {
+          "internalType": "bytes",
+          "name": "modifications",
+          "type": "bytes"
+        },
+        {
+          "internalType": "string",
+          "name": "hashSalt",
+          "type": "string"
+        }
+      ],
+      "name": "submitApplication",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "licensee",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "applicationHash",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "string",
+          "name": "url",
+          "type": "string"
+        }
+      ],
+      "name": "submitReport",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address[]",
+          "name": "licensees",
+          "type": "address[]"
+        },
+        {
+          "internalType": "bytes[]",
+          "name": "data",
+          "type": "bytes[]"
+        }
+      ],
+      "name": "updateAccounts",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "licensee",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "applicationHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "updateLicenseUsable",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "licensee",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "applicationHash",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint256",
+          "name": "newFrequency",
+          "type": "uint256"
+        }
+      ],
+      "name": "updateReportingFrequency",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "licensee",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "applicationHash",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint256",
+          "name": "newPeriod",
+          "type": "uint256"
+        }
+      ],
+      "name": "updateReportingGracePeriod",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "licensee",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "applicationHash",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint256",
+          "name": "newPeriod",
+          "type": "uint256"
+        }
+      ],
+      "name": "updateRoyaltyGracePeriod",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ]

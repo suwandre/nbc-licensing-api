@@ -2,6 +2,7 @@ use salvo::prelude::*;
 
 mod api;
 mod models;
+mod utils;
 
 /// Checks to see if Salvo is running
 #[handler]
