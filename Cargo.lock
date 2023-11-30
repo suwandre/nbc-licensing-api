@@ -933,6 +933,7 @@ name = "nbc-licensing-api"
 version = "0.1.0"
 dependencies = [
  "salvo",
+ "serde",
  "tokio",
  "tracing",
  "tracing-subscriber",

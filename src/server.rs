@@ -1,5 +1,7 @@
 use salvo::prelude::*;
 
+mod api;
+
 /// Checks to see if Salvo is running
 #[handler]
 async fn run_salvo() -> &'static str {
