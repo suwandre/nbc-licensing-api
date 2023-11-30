@@ -13,7 +13,7 @@ static LICENSE_ADDRESS: Lazy<Address> = Lazy::new(|| {
 
 // initializes the license contract once
 abigen!(
-    License,
+    LicenseContract,
     "src/abi/License.json",
     event_derives(serde::Deserialize, serde::Serialize)
 );
@@ -41,8 +41,8 @@ lazy_static!{
     };
 
     // initializes the license contract using the signer middleware instance
-    pub static ref LICENSE: License<SignerMiddleware<Provider<Http>, LocalWallet>> = {
-        let license = License::new(LICENSE_ADDRESS.clone(), Arc::new(CLIENT.clone()));
+    pub static ref LICENSE: LicenseContract<SignerMiddleware<Provider<Http>, LocalWallet>> = {
+        let license = LicenseContract::new(LICENSE_ADDRESS.clone(), Arc::new(CLIENT.clone()));
         license
     };
 }

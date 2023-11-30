@@ -365,6 +365,22 @@
       "inputs": [
         {
           "internalType": "address",
+          "name": "caller",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "queriedLicensee",
+          "type": "address"
+        }
+      ],
+      "name": "NotOwnerOrOwnLicensee",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
           "name": "licensee",
           "type": "address"
         },
@@ -1286,31 +1302,6 @@
       "name": "changeReport",
       "outputs": [],
       "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "getAccount",
-      "outputs": [
-        {
-          "components": [
-            {
-              "internalType": "bytes",
-              "name": "data",
-              "type": "bytes"
-            },
-            {
-              "internalType": "bool",
-              "name": "usable",
-              "type": "bool"
-            }
-          ],
-          "internalType": "struct ILicensee.LicenseeAccount",
-          "name": "",
-          "type": "tuple"
-        }
-      ],
-      "stateMutability": "view",
       "type": "function"
     },
     {

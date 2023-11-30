@@ -11,6 +11,7 @@ path = "src/server.rs"
 
 [dependencies]
 chrono = "0.4.31"
+dotenv = "0.15.0"
 ethers = "2.0.11"
 lazy_static = "1.4.0"
 salvo = { version = "0.58.5", features=["session"] }
