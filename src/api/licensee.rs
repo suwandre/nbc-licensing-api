@@ -5,6 +5,16 @@ use crate::{utils::{LicenseeAccount, contract_base::LICENSE}, models::{LicenseeR
 use std::{error::Error, str::FromStr};
 
 impl Licensee {
+    /// Gets a licensee account's data.
+    /// 
+    /// Retrieves the raw `LicenseeRaw` struct instance, then decodes the data into a `Licensee` struct instance.
+    pub async fn get_account_data(licensee_address: String) -> Result<Self, String> {
+        let licensee_raw = LicenseeRaw::get_account_raw(licensee_address).await?;
+        let decoded = Licensee::decode_licensee_data(licensee_raw.data, licensee_raw.usable)?;
+
+        Ok(decoded)
+    }
+
     /// Decodes the result obtained from `Licensee.sol - getAccount` into a `Licensee` struct instance.
     /// 
     /// Data should be a `bytes` type string that IS NOT empty and can be decoded using `ethers::utils::hex::decode`.
