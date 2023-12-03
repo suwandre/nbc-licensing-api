@@ -1,3 +1,4 @@
+use api::get_license_base_terms;
 use chrono::{DateTime, Utc};
 use configs::load_env;
 use models::{Licensee, LicenseeRaw};

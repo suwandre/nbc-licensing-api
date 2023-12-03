@@ -1,8 +1,8 @@
 use chrono::{DateTime, Utc};
-use ethers::{types::{H160, Bytes}, utils::{keccak256, hex::{encode, decode, decode_to_slice, decode_to_array, encode_prefixed}}};
+use ethers::{types::H160, utils::hex::{decode, encode_prefixed}};
 
 use crate::{utils::{LicenseeAccount, contract_base::LICENSE}, models::{LicenseeRaw, Licensee}};
-use std::{error::Error, str::FromStr};
+use std::str::FromStr;
 
 impl Licensee {
     /// Gets a licensee account's data.
