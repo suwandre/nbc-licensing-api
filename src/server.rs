@@ -20,6 +20,8 @@ async fn main() {
     tracing_subscriber::fmt().init();
     load_env().await;
 
+    println!("{:?}", test_url_terms);
+
     let router = Router::new().get(run_salvo);
     let acceptor = TcpListener::new("127.0.0.1:5800").bind().await;
     Server::new(acceptor).serve(router).await;
