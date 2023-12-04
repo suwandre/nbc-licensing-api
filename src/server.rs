@@ -3,6 +3,7 @@ use chrono::{DateTime, Utc};
 use configs::load_env;
 use models::{Licensee, LicenseeRaw};
 use salvo::prelude::*;
+use utils::bitmask;
 
 mod api;
 mod configs;
@@ -19,8 +20,6 @@ async fn run_salvo() -> &'static str {
 async fn main() {
     tracing_subscriber::fmt().init();
     load_env().await;
-
-    println!("{:?}", test_url_terms);
 
     let router = Router::new().get(run_salvo);
     let acceptor = TcpListener::new("127.0.0.1:5800").bind().await;

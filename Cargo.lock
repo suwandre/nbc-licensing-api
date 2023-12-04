@@ -2135,6 +2135,7 @@ dependencies = [
  "dotenv",
  "ethers",
  "lazy_static",
+ "num-bigint",
  "salvo",
  "serde",
  "tokio",

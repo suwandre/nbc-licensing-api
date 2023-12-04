@@ -1348,11 +1348,6 @@
         "type": "bytes32"
       },
       {
-        "internalType": "string",
-        "name": "appliedTerms",
-        "type": "string"
-      },
-      {
         "internalType": "uint256",
         "name": "firstPackedData",
         "type": "uint256"
@@ -1508,11 +1503,6 @@
                 "internalType": "bytes32",
                 "name": "licenseHash",
                 "type": "bytes32"
-              },
-              {
-                "internalType": "string",
-                "name": "appliedTerms",
-                "type": "string"
               },
               {
                 "internalType": "uint256",
@@ -2347,11 +2337,6 @@
         "internalType": "bytes32",
         "name": "licenseHash",
         "type": "bytes32"
-      },
-      {
-        "internalType": "string",
-        "name": "appliedTerms",
-        "type": "string"
       },
       {
         "internalType": "uint256",

@@ -1,4 +1,6 @@
+use ethers::types::U256;
 use serde::{Deserialize, Serialize};
+use num_bigint::BigUint;
 
 ///////////////////////////////////////////////////////////////////////////////
 ///////// Structs, Impl Blocks and Traits related to Application.sol //////////
