@@ -7,9 +7,9 @@ name = "Rust Build"
 # Command to build the Rust application
 command = "cargo build --release"
 
-# Start configuration
-[start]
+# Run configuration
+[run]
 # Name of the run step
 name = "Rust Run"
 # Command to run the Rust application
-command = "cargo run"
+command = "target/release/nbc-licensing-api"

@@ -14,12 +14,12 @@ name = "Rust Build"
 # Command to build the Rust application
 command = "cargo build --release"
 
-# Start configuration
-[start]
+# run configuration
+[run]
 # Name of the run step
 name = "Rust Run"
 # Command to run the Rust application
-command = "cargo run"
+command = "target/release/nbc-licensing-api"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
