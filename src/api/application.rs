@@ -1,6 +1,8 @@
-use ethers::types::U256;
+use std::str::FromStr;
 
-use crate::utils::bitpos;
+use ethers::{types::{U256, H256, H160}, utils::format_bytes32_string};
+
+use crate::utils::{LICENSE, LicenseAgreement};
 
 use super::get_license_base_terms;
 
@@ -23,7 +25,7 @@ pub async fn calculate_license_fee(
     // permit, base fee rate in native currency (e.g. BNB/ETH)
     let base_fee_rates = [
         ("Asset Creation", U256::from(15)*U256::exp10(18)),
-        ("Existing Asset Usage", U256::from_dec_str("7.5").unwrap()*U256::exp10(18)),
+        ("Existing Asset Usage", U256::from(7500000000000000000u128)),
         ("Asset Modification", U256::from(12)*U256::exp10(18))
     ];
 
@@ -41,8 +43,8 @@ pub async fn calculate_license_fee(
     Ok(U256::from(base_fee * duration_multiplier))
 }
 
-/// Packs the application's parameters into `firstPackedData` and `secondPackedData`, as required by `IApplication.sol - ApplicationData`.
-pub fn pack_data(
+/// Packs the application's parameters into `firstPackedData` and `secondPackedData` via `Application.sol - getPackedData`.
+pub async fn pack_data(
     duration: U256,
     license_fee: U256,
     reporting_frequency: U256,
@@ -51,36 +53,26 @@ pub fn pack_data(
     extra_data: U256
 ) -> [U256; 2] {
     let current_timestamp = U256::from(chrono::Utc::now().timestamp());
+
     let submission_date = current_timestamp;
     let approval_date = U256::from(0);
     let expiration_date = current_timestamp + duration;
-
+    
     let untimely_reports = U256::from(0);
     let untimely_royalty_payments = U256::from(0);
 
-    // bitposes:
-    // [0 - 39] - the application's submission date.
-    // [40 - 79] - the application's approval date (if approved; else 0).
-    // [80 - 119] - the license's expiration date.
-    // [120 - 255] - the license fee for this license.
-    let first_packed_data = submission_date 
-        | (approval_date << bitpos("approval_date")) 
-        | (expiration_date << bitpos("expiration_date")) 
-        | (license_fee << bitpos("license_fee"));
+    let packed_data = LICENSE.get_packed_data(
+        submission_date,
+        approval_date,
+        expiration_date,
+        license_fee,
+        reporting_frequency,
+        reporting_grace_period,
+        royalty_grace_period,
+        untimely_reports,
+        untimely_royalty_payments,
+        extra_data
+    ).await.unwrap();
 
-    // bitposes:
-    // [0 - 31] - the reporting frequency (frequency that a licensee must submit a revenue report and subsequently pay their royalty share).
-    // [32 - 63] - the reporting grace period (amount of time given to report after the reporting frequency has passed before the licensee is penalized).
-    // [64 - 95] - the royalty grace period (amount of time given to pay royalty after the revenue report for that period has been approved before the licensee is penalized).
-    // [96 - 103] - the amount of untimely reports (i.e. reports that were not submitted within the reporting grace period).
-    // [104 - 111] - the amount of untimely royalty payments (i.e. royalty payments that were not submitted within the royalty grace period).
-    // [112 - 255] - extra data (if applicable).
-    let second_packed_data = reporting_frequency 
-        | (reporting_grace_period << bitpos("reporting_grace_period")) 
-        | (royalty_grace_period << bitpos("royalty_grace_period")) 
-        | (untimely_reports << bitpos("untimely_reports"))
-        | (untimely_royalty_payments << bitpos("untimely_royalty_payments")
-        | (extra_data << bitpos("extra_data")));
-
-    [first_packed_data, second_packed_data]
+    [packed_data.0, packed_data.1]
 }

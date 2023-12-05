@@ -1640,6 +1640,75 @@
     "type": "function"
   },
   {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "submissionDate",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "approvalDate",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "expirationDate",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "licenseFee",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "reportingFrequency",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "reportingGracePeriod",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "royaltyGracePeriod",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "untimelyReports",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "untimelyRoyaltyPayments",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "extraData",
+        "type": "uint256"
+      }
+    ],
+    "name": "getPackedData",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "firstPackedData",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "secondPackedData",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "pure",
+    "type": "function"
+  },
+  {
     "inputs": [],
     "name": "getReceiver",
     "outputs": [
