@@ -7,6 +7,20 @@ edition = "2021"
 name = "nbc-licensing-api"
 path = "src/server.rs"
 
+# Build configuration
+[build]
+# Name of the build step
+name = "Rust Build"
+# Command to build the Rust application
+command = "cargo build --release"
+
+# Start configuration
+[start]
+# Name of the run step
+name = "Rust Run"
+# Command to run the Rust application
+command = "cargo run"
+
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
