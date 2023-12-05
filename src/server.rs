@@ -12,7 +12,7 @@ mod configs;
 mod models;
 mod utils;
 
-/// Checks to see if Salvo is running
+/// Checks to see if Salvo is running.
 #[handler]
 async fn run_salvo() -> &'static str {
     "Salvo is running!"
