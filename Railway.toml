@@ -7,8 +7,8 @@ name = "Rust Build"
 # Command to build the Rust application
 command = "cargo build --release"
 
-# Run configuration
-[run]
+# Start configuration
+[start]
 # Name of the run step
 name = "Rust Run"
 # Command to run the Rust application
