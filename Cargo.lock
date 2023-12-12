@@ -2170,6 +2170,7 @@ dependencies = [
  "mongodb",
  "num-bigint",
  "serde",
+ "serde_json",
  "tokio",
  "tracing",
  "tracing-subscriber",

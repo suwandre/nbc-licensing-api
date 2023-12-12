@@ -30,5 +30,12 @@ pub struct User {
     /// the user's main home/company address
     pub address: String,
     /// (optional) the user's company name
-    pub company: Option<String>
+    pub company: Option<String>,
+    /// if the user has completed KYC
+    pub kyc_verified: bool,
+    /// when the user last completed KYC.
+    /// 
+    /// if the user has never completed KYC, this will be the same as `created_at`.
+    #[serde(serialize_with = "serialize_datetime", deserialize_with = "deserialize_datetime")]
+    pub last_kyc_verification: DateTime<Utc>,
 }
