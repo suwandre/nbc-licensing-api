@@ -1,0 +1,1 @@
+web: ./target/release/nbc-licensing-api
