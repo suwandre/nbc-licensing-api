@@ -2,7 +2,7 @@ use std::str::FromStr;
 
 use api::{get_license_base_terms, calculate_license_fee, pack_data};
 use chrono::{DateTime, Utc};
-use configs::load_env;
+use configs::{load_env, get_db, connect_mongo};
 use std::env;
 use std::net::{IpAddr, Ipv4Addr, SocketAddr};
 use ethers::types::U256;
@@ -22,6 +22,7 @@ async fn run_axum() -> &'static str {
 #[tokio::main]
 async fn main() {
     load_env();
+    connect_mongo().await;
 
     let port = env::var("PORT").expect("PORT not set in .env");
     let port = port.parse::<u16>().expect("Invalid port given");

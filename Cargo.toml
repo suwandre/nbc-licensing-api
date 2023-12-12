@@ -15,6 +15,7 @@ chrono = "0.4.31"
 dotenv = "0.15.0"
 ethers = "2.0.11"
 lazy_static = "1.4.0"
+mongodb = "2.8.0"
 num-bigint = "0.4.4"
 serde = "1.0.193"
 tokio = { version = "1.34.0", features = ["macros", "rt-multi-thread"] }
