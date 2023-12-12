@@ -68,7 +68,7 @@ impl User {
     /// 
     /// Returns its newly created `ObjectId` if the operation is successful.
     pub async fn store_user(&self) -> Result<ObjectId, mongodb::error::Error> {
-        let db = get_db("Licensing").await;
+        let db = get_db("MainDatabase").await;
         let user_col = db.collection::<Self>("Users");
 
         let user = user_col.insert_one(self, None).await?;

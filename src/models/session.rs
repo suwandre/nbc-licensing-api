@@ -38,3 +38,35 @@ pub struct Session {
     pub version: u8
 }
 
+impl Session {
+    /// Creates a new `Session` instance.
+    pub fn new(
+        expiration_date: DateTime<Utc>,
+        wallet_address: String,
+        chain_id: u32,
+        domain: String,
+        user_session_id: String,
+        nonce: String,
+        signature: String,
+        payload: Option<Value>,
+        profile_id: String,
+        uri: String,
+        version: u8
+    ) -> Self {
+        Self {
+            _id: ObjectId::new(),
+            expiration_date,
+            wallet_address,
+            chain_id,
+            domain,
+            user_session_id,
+            nonce,
+            signature,
+            payload,
+            profile_id,
+            uri,
+            version
+        }
+    }
+}
+

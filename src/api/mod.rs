@@ -1,7 +1,5 @@
-pub mod licensee;
-pub mod permit;
-pub mod application;
+pub mod licensing;
+pub mod user;
 
-pub use licensee::*;
-pub use permit::*;
-pub use application::*;
+pub use licensing::*;
+pub use user::*;

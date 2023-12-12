@@ -6,7 +6,7 @@ use configs::{load_env, get_db, connect_mongo};
 use std::env;
 use std::net::{IpAddr, Ipv4Addr, SocketAddr};
 use ethers::types::U256;
-use models::{Licensee, LicenseeRaw};
+use models::{Licensee, LicenseeRaw, User};
 use axum::{routing::get, Router};
 
 mod api;
