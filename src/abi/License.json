@@ -50,6 +50,22 @@
         "type": "bytes32"
       }
     ],
+    "name": "ApplicationAlreadyPaid",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "licensee",
+        "type": "address"
+      },
+      {
+        "internalType": "bytes32",
+        "name": "applicationHash",
+        "type": "bytes32"
+      }
+    ],
     "name": "ApplicationNotFound",
     "type": "error"
   },
@@ -278,6 +294,17 @@
     "inputs": [
       {
         "internalType": "address",
+        "name": "licensee",
+        "type": "address"
+      }
+    ],
+    "name": "LicenseeNotApproved",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
         "name": "owner",
         "type": "address"
       }
@@ -332,6 +359,22 @@
       }
     ],
     "name": "NewReportNotYetAllowed",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "licensee",
+        "type": "address"
+      },
+      {
+        "internalType": "bytes32",
+        "name": "applicationHash",
+        "type": "bytes32"
+      }
+    ],
+    "name": "NoReportsFound",
     "type": "error"
   },
   {
@@ -1628,6 +1671,64 @@
         "type": "bytes32"
       }
     ],
+    "name": "getLicenseRecord",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "address",
+            "name": "licensee",
+            "type": "address"
+          },
+          {
+            "internalType": "bytes32",
+            "name": "applicationHash",
+            "type": "bytes32"
+          },
+          {
+            "components": [
+              {
+                "internalType": "uint256",
+                "name": "amountDue",
+                "type": "uint256"
+              },
+              {
+                "internalType": "string",
+                "name": "url",
+                "type": "string"
+              },
+              {
+                "internalType": "uint256",
+                "name": "packedData",
+                "type": "uint256"
+              }
+            ],
+            "internalType": "struct IRoyalty.Report[]",
+            "name": "reports",
+            "type": "tuple[]"
+          }
+        ],
+        "internalType": "struct IRoyalty.LicenseRecord",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "licensee",
+        "type": "address"
+      },
+      {
+        "internalType": "bytes32",
+        "name": "applicationHash",
+        "type": "bytes32"
+      }
+    ],
     "name": "getModifications",
     "outputs": [
       {
@@ -2122,42 +2223,6 @@
         "type": "bytes32"
       }
     ],
-    "name": "incrementUntimelyReports",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "licensee",
-        "type": "address"
-      },
-      {
-        "internalType": "bytes32",
-        "name": "applicationHash",
-        "type": "bytes32"
-      }
-    ],
-    "name": "incrementUntimelyRoyaltyPayments",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "licensee",
-        "type": "address"
-      },
-      {
-        "internalType": "bytes32",
-        "name": "applicationHash",
-        "type": "bytes32"
-      }
-    ],
     "name": "isFeePaid",
     "outputs": [
       {
@@ -2237,6 +2302,19 @@
         "internalType": "bytes32",
         "name": "applicationHash",
         "type": "bytes32"
+      }
+    ],
+    "name": "payLicenseFee",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "applicationHash",
+        "type": "bytes32"
       },
       {
         "internalType": "uint256",
@@ -2251,7 +2329,7 @@
     ],
     "name": "payRoyalty",
     "outputs": [],
-    "stateMutability": "nonpayable",
+    "stateMutability": "payable",
     "type": "function"
   },
   {
