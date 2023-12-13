@@ -33,7 +33,7 @@ impl Licensee {
 
         let wallet_address = split.next().ok_or("")?.to_string();
         let name = split.next().ok_or("")?.to_string();
-        let dob = DateTime::parse_from_rfc3339(&split.next().ok_or("")?).unwrap().with_timezone(&Utc);
+        let dob = DateTime::parse_from_rfc3339(&split.next().ok_or("")?).unwrap().with_timezone(&Utc).timestamp();
         let address = split.next().ok_or("")?.to_string();
         let email_address = split.next().ok_or("")?.to_string();
         let phone_number = split.next().ok_or("")?.to_string();
@@ -62,7 +62,7 @@ impl Licensee {
         Licensee {
             wallet_address: "".to_string(),
             name: "".to_string(),
-            dob: Utc::now(),
+            dob: Utc::now().timestamp(),
             address: "".to_string(),
             email_address: "".to_string(),
             phone_number: "".to_string(),

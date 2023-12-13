@@ -2,7 +2,7 @@ use chrono::{DateTime, Utc};
 use mongodb::{bson::oid::ObjectId, Collection};
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
-use crate::{utils::serialization::datetime::{serialize_datetime, deserialize_datetime, serialize_datetime_option, deserialize_datetime_option}, configs::{get_db, get_collection}};
+use crate::configs::{get_db, get_collection};
 
 /// `User` struct that represents a user in the database.
 /// 

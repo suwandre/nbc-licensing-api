@@ -1,7 +1,6 @@
 use chrono::{DateTime, Utc};
 use ethers::utils::hex::{encode_prefixed, decode};
 use serde::{Deserialize, Serialize};
-use crate::utils::serialization::datetime::{serialize_datetime, deserialize_datetime};
 
 ///////////////////////////////////////////////////////////////////////////////
 ////////// Structs, Impl Blocks and Traits related to Licensee.sol ////////////
@@ -15,8 +14,7 @@ pub struct Licensee {
     /// the licensee's full name
     pub name: String,
     /// the licensee's date of birth
-    #[serde(serialize_with = "serialize_datetime", deserialize_with = "deserialize_datetime")]
-    pub dob: DateTime<Utc>,
+    pub dob: i64,
     /// the licensee's home/company address
     pub address: String,
     /// the licensee's email address
