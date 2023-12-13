@@ -1,6 +1,6 @@
 use chrono::{DateTime, Utc};
-use mongodb::bson::oid::ObjectId;
-use crate::utils::serialization::datetime::{serialize_datetime, deserialize_datetime};
+use mongodb::{bson::oid::ObjectId, Collection};
+use crate::{utils::serialization::datetime::{serialize_datetime, deserialize_datetime}, configs::get_collection};
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 
@@ -66,6 +66,19 @@ impl Session {
             profile_id,
             uri,
             version
+        }
+    }
+
+    /// Stores a `Session` instance in the database.
+    /// 
+    /// Returns its newly created `ObjectId` if the operation is successful.
+    pub async fn store_session(&self) -> Result<ObjectId, mongodb::error::Error> {
+        let session_col: Collection<Session> = get_collection("MainDatabase", "Sessions").await;
+        let session = session_col.insert_one(self, None).await?;
+
+        match session.inserted_id.as_object_id() {
+            Some(id) => Ok(id.clone()),
+            None => Err(mongodb::error::Error::custom("Failed to get inserted ID."))
         }
     }
 }

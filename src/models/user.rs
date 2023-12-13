@@ -1,7 +1,7 @@
 use chrono::{DateTime, Utc};
-use mongodb::bson::oid::ObjectId;
+use mongodb::{bson::oid::ObjectId, Collection};
 use serde::{Deserialize, Serialize};
-use crate::{utils::serialization::datetime::{serialize_datetime, deserialize_datetime, serialize_datetime_option, deserialize_datetime_option}, configs::get_db};
+use crate::{utils::serialization::datetime::{serialize_datetime, deserialize_datetime, serialize_datetime_option, deserialize_datetime_option}, configs::{get_db, get_collection}};
 
 /// `User` struct that represents a user in the database.
 /// 
@@ -68,9 +68,7 @@ impl User {
     /// 
     /// Returns its newly created `ObjectId` if the operation is successful.
     pub async fn store_user(&self) -> Result<ObjectId, mongodb::error::Error> {
-        let db = get_db("MainDatabase").await;
-        let user_col = db.collection::<Self>("Users");
-
+        let user_col: Collection<User> = get_collection("MainDatabase", "Users").await;
         let user = user_col.insert_one(self, None).await?;
 
         match user.inserted_id.as_object_id() {
