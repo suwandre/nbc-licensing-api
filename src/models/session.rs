@@ -6,14 +6,15 @@ use serde_json::Value;
 
 /// `Session` struct that represents a session that gets created when a user logs in via the webapp.
 /// 
+/// All dates and timestamps are stored in UNIX format.
+/// 
 /// Since this uses Moralis' NextAuth provider, the majority of these fields will follow SIWE's EIP4361 standard.
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Session {
     /// the object ID of the session in the database
     pub _id: ObjectId,
     /// the session's expiration date
-    #[serde(serialize_with = "serialize_datetime", deserialize_with = "deserialize_datetime")]
-    pub expiration_date: DateTime<Utc>,
+    pub expiration_date: i64,
     /// the user's wallet address tied to this session
     pub wallet_address: String,
     /// the id of the chain the user is on when they logged in
@@ -41,7 +42,7 @@ pub struct Session {
 impl Session {
     /// Creates a new `Session` instance.
     pub fn new(
-        expiration_date: DateTime<Utc>,
+        expiration_date: i64,
         wallet_address: String,
         chain_id: u32,
         domain: String,

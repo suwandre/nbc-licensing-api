@@ -1,30 +1,30 @@
 use chrono::{DateTime, Utc};
 use mongodb::{bson::oid::ObjectId, Collection};
 use serde::{Deserialize, Serialize};
+use serde_with::skip_serializing_none;
 use crate::{utils::serialization::datetime::{serialize_datetime, deserialize_datetime, serialize_datetime_option, deserialize_datetime_option}, configs::{get_db, get_collection}};
 
 /// `User` struct that represents a user in the database.
 /// 
+/// All dates and timestamps are stored in UNIX format.
 /// NOTE: Temporarily, no passwords are managed here as users are required to log in via their wallet.
+#[skip_serializing_none]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct User {
     /// the object ID of the user in the database
-    pub _id: ObjectId,
+    pub _id: Option<ObjectId>,
     /// the user's wallet address tied to this User account instance
     pub wallet_address: String,
     /// when the user instance was created
-    #[serde(serialize_with = "serialize_datetime", deserialize_with = "deserialize_datetime")]
-    pub created_at: DateTime<Utc>,
+    pub created_at: i64,
     /// when the user instance was last updated
-    #[serde(serialize_with = "serialize_datetime", deserialize_with = "deserialize_datetime")]
-    pub updated_at: DateTime<Utc>,
+    pub updated_at: i64,
     
     /* web2 related info */
     /// the user's full name
     pub name: Option<String>,
     /// the user's date of birth
-    #[serde(serialize_with = "serialize_datetime_option", deserialize_with = "deserialize_datetime_option")]
-    pub dob: Option<DateTime<Utc>>,
+    pub dob: Option<i64>,
     /// the user's email address
     pub email: Option<String>,
     /// the user's phone number
@@ -38,8 +38,7 @@ pub struct User {
     /// when the user last completed KYC.
     /// 
     /// if the user has never completed KYC, this will be the same as `created_at`.
-    #[serde(serialize_with = "serialize_datetime", deserialize_with = "deserialize_datetime")]
-    pub last_kyc_verification: DateTime<Utc>,
+    pub last_kyc_verification: i64,
 }
 
 impl User {
@@ -49,10 +48,10 @@ impl User {
     /// Hence, all Web2-related fields will be left blank.
     pub fn new(wallet_address: String) -> Self {
         Self {
-            _id: ObjectId::new(),
+            _id: Some(ObjectId::new()),
             wallet_address,
-            created_at: Utc::now(),
-            updated_at: Utc::now(),
+            created_at: Utc::now().timestamp(),
+            updated_at: Utc::now().timestamp(),
             name: None,
             dob: None,
             email: None,
@@ -60,7 +59,7 @@ impl User {
             address: None,
             company: None,
             kyc_verified: false,
-            last_kyc_verification: Utc::now(),
+            last_kyc_verification: Utc::now().timestamp(),
         }
     }
 

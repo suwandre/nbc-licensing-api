@@ -11,7 +11,7 @@ use crate::{models::{ApiResponse, User, Session}, utils::CustomError, configs::g
 /// NOTE: We assume that a new user will obviously not have an existing session instance, so we don't check for that here.
 pub async fn create_user(
     wallet_address: String,
-    expiration_date: DateTime<Utc>,
+    expiration_date: i64,
     chain_id: u32,
     domain: String,
     user_session_id: String,

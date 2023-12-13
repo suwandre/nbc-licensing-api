@@ -1,7 +1,7 @@
 use std::str::FromStr;
 
 use api::{get_license_base_terms, calculate_license_fee, pack_data, create_user, check_user_exists};
-use chrono::{DateTime, Utc};
+use chrono::{DateTime, Utc, TimeZone};
 use configs::{load_env, get_db, connect_mongo};
 use routes::user_routes;
 use std::env;
