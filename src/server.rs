@@ -1,7 +1,7 @@
 use std::str::FromStr;
 
 use api::{get_license_base_terms, calculate_license_fee, pack_data, create_user, check_user_exists};
-use axum::http::Method;
+use axum::http::{Method, HeaderValue};
 use chrono::{DateTime, Utc, TimeZone};
 use configs::{load_env, get_db, connect_mongo};
 use routes::user_routes;
@@ -37,7 +37,7 @@ async fn main() {
     // temporarily allowing localhost:3000 for testing
     let cors_middleware = CorsLayer::new()
         .allow_methods([Method::GET, Method::POST, Method::PUT, Method::DELETE])
-        .allow_origin("http://localhost:3000");
+        .allow_origin("http://localhost:3000".parse::<HeaderValue>().unwrap());
 
     let app = Router::new()
         .layer(cors_middleware)
