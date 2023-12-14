@@ -25,6 +25,7 @@ async fn run_axum() -> &'static str {
 #[tokio::main]
 async fn main() {
     tracing_subscriber::fmt::init();
+    env_logger::init();
 
     load_env();
     connect_mongo().await;

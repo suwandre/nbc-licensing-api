@@ -1,6 +1,7 @@
 use axum::{response::{IntoResponse, Response}, http::StatusCode, Router, routing::{get, post}, extract::{Json, Request, Path}};
 use serde_json::json;
 use axum_macros::debug_handler;
+use log::info;
 
 use crate::{models::{User, ApiResponse, CreateUser}, api::create_user};
 
@@ -19,7 +20,7 @@ async fn hello_world() -> impl IntoResponse {
 async fn create_user_route(Json(payload): Json<CreateUser>) -> impl IntoResponse {
     let mut status_code = StatusCode::OK;
 
-    println!("payload of create user route: {:?}", payload);
+    info!("Payload: {:?}", payload);
 
     let object_ids = create_user(
         payload.wallet_address,
