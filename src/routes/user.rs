@@ -19,6 +19,8 @@ async fn hello_world() -> impl IntoResponse {
 async fn create_user_route(Json(payload): Json<CreateUser>) -> impl IntoResponse {
     let mut status_code = StatusCode::OK;
 
+    println!("payload of create user route: {:?}", payload);
+
     let object_ids = create_user(
         payload.wallet_address,
         payload.expiration_date,
@@ -92,7 +94,7 @@ async fn get_user_route(Path(wallet_address): Path<String>) -> impl IntoResponse
 
         Err(e) => {
             status_code = StatusCode::BAD_REQUEST;
-            
+
             let api_response= ApiResponse {
                 status: StatusCode::BAD_REQUEST,
                 message: "Failed to retrieve user.".to_string(),
