@@ -17,6 +17,8 @@ async fn hello_world() -> impl IntoResponse {
 
 #[debug_handler]
 async fn create_user_route(Json(payload): Json<CreateUser>) -> impl IntoResponse {
+    let mut status_code = StatusCode::OK;
+
     let object_ids = create_user(
         payload.wallet_address,
         payload.expiration_date,
@@ -48,6 +50,8 @@ async fn create_user_route(Json(payload): Json<CreateUser>) -> impl IntoResponse
         },
 
         Err(e) => {
+            status_code = StatusCode::BAD_REQUEST;
+
             let api_response= ApiResponse {
                 status: StatusCode::BAD_REQUEST,
                 message: "Failed to create user.".to_string(),
@@ -61,10 +65,15 @@ async fn create_user_route(Json(payload): Json<CreateUser>) -> impl IntoResponse
         }
     };
 
-    serde_json::to_string_pretty(&api_response).unwrap()
+    (
+        status_code,
+        serde_json::to_string_pretty(&api_response).unwrap()
+    )
 }
 
 async fn get_user_route(Path(wallet_address): Path<String>) -> impl IntoResponse {
+    let mut status_code = StatusCode::OK;
+
     let user = User::get_user(wallet_address).await;
 
     let api_response = match user {
@@ -82,6 +91,8 @@ async fn get_user_route(Path(wallet_address): Path<String>) -> impl IntoResponse
         },
 
         Err(e) => {
+            status_code = StatusCode::BAD_REQUEST;
+            
             let api_response= ApiResponse {
                 status: StatusCode::BAD_REQUEST,
                 message: "Failed to retrieve user.".to_string(),
@@ -95,6 +106,9 @@ async fn get_user_route(Path(wallet_address): Path<String>) -> impl IntoResponse
         }
     };
 
-    serde_json::to_string_pretty(&api_response).unwrap()
+    (
+        status_code,
+        serde_json::to_string_pretty(&api_response).unwrap()
+    )
 }
 
