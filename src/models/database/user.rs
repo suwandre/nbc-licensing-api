@@ -49,7 +49,7 @@ impl User {
     pub fn new(wallet_address: String) -> Self {
         Self {
             _id: Some(ObjectId::new()),
-            wallet_address,
+            wallet_address: wallet_address.to_lowercase(),
             created_at: Utc::now().timestamp(),
             updated_at: Utc::now().timestamp(),
             name: None,
@@ -79,7 +79,8 @@ impl User {
     /// Gets a user's profile from the database.
     pub async fn get_user(wallet_address: String) -> Result<Self, CustomError> {
         let user_col: Collection<User> = get_collection("MainDatabase", "Users").await;
-        let user = user_col.find_one(doc! { "wallet_address": wallet_address }, None).await?;
+        // case-friendly search
+        let user = user_col.find_one(doc! { "wallet_address": wallet_address.to_lowercase() }, None).await?;
 
         match user {
             Some(user) => Ok(user),
