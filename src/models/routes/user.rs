@@ -10,7 +10,6 @@ pub struct CreateUser {
     pub expiration_date: i64,
     pub chain_id: u32,
     pub domain: String,
-    pub user_session_id: String,
     pub nonce: String,
     pub signature: String,
     pub payload: Option<Value>,

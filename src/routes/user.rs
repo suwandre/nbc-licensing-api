@@ -22,7 +22,6 @@ async fn create_user_route(Json(payload): Json<CreateUser>) -> impl IntoResponse
         payload.expiration_date,
         payload.chain_id,
         payload.domain,
-        payload.user_session_id,
         payload.nonce,
         payload.signature,
         payload.payload,

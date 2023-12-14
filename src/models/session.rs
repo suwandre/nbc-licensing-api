@@ -21,10 +21,6 @@ pub struct Session {
     pub chain_id: u32,
     /// the domain that is requesting the login
     pub domain: String,
-    /// the unique session-based user ID that gets generated when the user logs in
-    /// 
-    /// NOTE: not to be confused with the user's object ID in the database.
-    pub user_session_id: String,
     /// a random string generated to prevent replay attacks
     pub nonce: String,
     /// a signed signature from the user when they log in
@@ -46,7 +42,6 @@ impl Session {
         wallet_address: String,
         chain_id: u32,
         domain: String,
-        user_session_id: String,
         nonce: String,
         signature: String,
         payload: Option<Value>,
@@ -60,7 +55,6 @@ impl Session {
             wallet_address,
             chain_id,
             domain,
-            user_session_id,
             nonce,
             signature,
             payload,
