@@ -14,10 +14,13 @@ pub struct User {
     /// the object ID of the user in the database
     pub _id: Option<ObjectId>,
     /// the user's wallet address tied to this User account instance
+    #[serde(rename = "walletAddress")]
     pub wallet_address: String,
     /// when the user instance was created
+    #[serde(rename = "createdAt")]
     pub created_at: i64,
     /// when the user instance was last updated
+    #[serde(rename = "updatedAt")]
     pub updated_at: i64,
     
     /* web2 related info */
@@ -34,10 +37,12 @@ pub struct User {
     /// the user's company name
     pub company: Option<String>,
     /// if the user has completed KYC
+    #[serde(rename = "kycVerified")]
     pub kyc_verified: bool,
     /// when the user last completed KYC.
     /// 
-    /// if the user has never completed KYC, this will be the same as `created_at`.
+    /// if the user has never completed KYC, this will by default be 0.
+    #[serde(rename = "lastKycVerification")]
     pub last_kyc_verification: i64,
 }
 
@@ -59,7 +64,7 @@ impl User {
             address: None,
             company: None,
             kyc_verified: false,
-            last_kyc_verification: Utc::now().timestamp(),
+            last_kyc_verification: 0,
         }
     }
 

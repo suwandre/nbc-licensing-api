@@ -184,6 +184,18 @@ dependencies = [
 ]
 
 [[package]]
+name = "axum-macros"
+version = "0.4.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "5a2edad600410b905404c594e2523549f1bcd4bded1e252c8f74524ccce0b867"
+dependencies = [
+ "heck",
+ "proc-macro2",
+ "quote",
+ "syn 2.0.39",
+]
+
+[[package]]
 name = "backtrace"
 version = "0.3.69"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2202,8 +2214,10 @@ name = "nbc-licensing-api"
 version = "0.1.0"
 dependencies = [
  "axum",
+ "axum-macros",
  "chrono",
  "dotenv",
+ "either",
  "ethers",
  "lazy_static",
  "mongodb",
