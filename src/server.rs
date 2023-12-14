@@ -40,9 +40,9 @@ async fn main() {
         .allow_origin("http://localhost:3000".parse::<HeaderValue>().unwrap());
 
     let app = Router::new()
-        .layer(cors_middleware)
         .route("/", get(run_axum))
-        .nest("/user", user_routes());
+        .nest("/user", user_routes())
+        .layer(cors_middleware);
 
     let listener = tokio::net::TcpListener::bind(&addr).await.unwrap();
     axum::serve(listener, app).await.unwrap();
