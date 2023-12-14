@@ -1,8 +1,8 @@
 use chrono::{DateTime, Utc};
-use mongodb::{bson::oid::ObjectId, Collection};
+use mongodb::{bson::{oid::ObjectId, doc}, Collection};
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
-use crate::configs::{get_db, get_collection};
+use crate::{configs::{get_db, get_collection}, utils::CustomError};
 
 /// `User` struct that represents a user in the database.
 /// 
@@ -14,13 +14,10 @@ pub struct User {
     /// the object ID of the user in the database
     pub _id: Option<ObjectId>,
     /// the user's wallet address tied to this User account instance
-    #[serde(rename = "walletAddress")]
     pub wallet_address: String,
     /// when the user instance was created
-    #[serde(rename = "createdAt")]
     pub created_at: i64,
     /// when the user instance was last updated
-    #[serde(rename = "updatedAt")]
     pub updated_at: i64,
     
     /* web2 related info */
@@ -37,12 +34,10 @@ pub struct User {
     /// the user's company name
     pub company: Option<String>,
     /// if the user has completed KYC
-    #[serde(rename = "kycVerified")]
     pub kyc_verified: bool,
     /// when the user last completed KYC.
     /// 
     /// if the user has never completed KYC, this will by default be 0.
-    #[serde(rename = "lastKycVerification")]
     pub last_kyc_verification: i64,
 }
 
@@ -78,6 +73,17 @@ impl User {
         match user.inserted_id.as_object_id() {
             Some(id) => Ok(id),
             None => Err(mongodb::error::Error::custom("Failed to get inserted ID."))
+        }
+    }
+
+    /// Gets a user's profile from the database.
+    pub async fn get_user(wallet_address: String) -> Result<Self, CustomError> {
+        let user_col: Collection<User> = get_collection("MainDatabase", "Users").await;
+        let user = user_col.find_one(doc! { "wallet_address": wallet_address }, None).await?;
+
+        match user {
+            Some(user) => Ok(user),
+            None => Err(CustomError::DatabaseError("User not found.".to_string()))
         }
     }
 }

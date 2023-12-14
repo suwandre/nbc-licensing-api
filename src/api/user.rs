@@ -22,6 +22,11 @@ pub async fn create_user(
     uri: String,
     version: u8
 ) -> Result<Vec<ObjectId>, CustomError> {
+    // checks if the user exists. if they do, return an error.
+    if check_user_exists(wallet_address.clone()).await? {
+        return Err(CustomError::DatabaseError("To be created user already exists.".to_string()));
+    }
+
     let user = User::new(wallet_address.clone());
     let user_id = user.store_user().await?;
 
