@@ -1,14 +1,14 @@
 use std::str::FromStr;
 
 use api::{get_license_base_terms, calculate_license_fee, pack_data, create_user, check_user_exists};
+use axum::http::Method;
 use chrono::{DateTime, Utc, TimeZone};
 use configs::{load_env, get_db, connect_mongo};
 use routes::user_routes;
 use std::env;
 use std::net::{IpAddr, Ipv4Addr, SocketAddr};
-use ethers::types::U256;
-use models::{Licensee, LicenseeRaw, User};
 use axum::{routing::get, Router};
+use tower_http::cors::CorsLayer;
 
 mod api;
 mod configs;
@@ -34,7 +34,13 @@ async fn main() {
 
     println!("Listening on {}", addr);
 
+    // temporarily allowing localhost:3000 for testing
+    let cors_middleware = CorsLayer::new()
+        .allow_methods([Method::GET, Method::POST, Method::PUT, Method::DELETE])
+        .allow_origin("http://localhost:3000");
+
     let app = Router::new()
+        .layer(cors_middleware)
         .route("/", get(run_axum))
         .nest("/user", user_routes());
 
